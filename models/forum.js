@@ -1,5 +1,5 @@
-const mongoose = require('../db/connection');
-// const postSchema= require('./post');
+const mongoose = require('mongoose');
+const postSchema= require('./post');
 
 const forumSchema=  new mongoose.Schema({
     topic: {
@@ -10,7 +10,7 @@ const forumSchema=  new mongoose.Schema({
         type:String,
         required:true,
     },
-    // posts:[postSchema]
+    posts: [postSchema]
 }, {
     timestamps:true
 })
