@@ -15,10 +15,8 @@ const Forum = require('./../models/forum');
 //     });
 // CREATE
 // POST
-forumRouter.post('/', async (req, res) => {
-    try {
-        Forum.findOneAndUpdate(
-
+        forumRouter.findOneAndUpdate('/', async (req, res) => {
+            try {
             { _id: req.params.id }, // search criteria of what to update
             { $push: { post: req.body } }, // how to update it
             { new: true }, // tells findOneAndUpdate to return modified article, not the original
@@ -26,11 +24,13 @@ forumRouter.post('/', async (req, res) => {
                 console.log(forums);
                 db.close();
             });
-res.status(201).json(forums)
-    } catch (err) {
-    console.log(err)
-}
-})
+            res.status(201).json(forums)
+            } catch(err) {
+                console.log(err)
+            }
+        })
+        
+
 
 // DESTROY
 // DELETE /reviews/:id
