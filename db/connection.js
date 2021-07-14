@@ -1,11 +1,7 @@
 //mongo atlas connection 
 require('dotenv').config();
-const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
-const cors = require('cors')
-const PORT = process.env.PORT || 3000;
-const Forum = require('../models/forum');
+
 
 
 // Mongo URL and Connection
@@ -36,7 +32,7 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 //seeding the db
 
 const seedData = require('../db/seed')
-Forum.insertMany(seedData, (err, forum) => {
+Forum.findOneAndUpdate(seedData, (err, forum) => {
 	if (err) {
 		console.log(err);
 	}
