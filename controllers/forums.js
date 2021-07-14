@@ -39,7 +39,7 @@ forumRouter.put('/:id', async(req, res)=> {
 			req.body,
 			{ new:true } 
 		);
-		res.status(201).json(updatedForum)
+		res.status(201).json(updateForum)
 	}catch(err){
 		console.log(err)
 	}

@@ -1,39 +1,11 @@
-const express = require('express');
-const forumRouter = express.Router();
-
-const Forum = require('./../models/forum');
-
-
-// Forum.findOneAndUpdate(
-
-//     { name: 'Number' }, // search criteria of what to update
-//     { $push: { post: req.body } }, // how to update it
-//     { new: true }, // tells findOneAndUpdate to return modified article, not the original
-//     (err, vampires) => {
-//         console.log(vampires);
-//         db.close();
-//     });
+// const express = require('express');
+// const forumRouter= express.Router();
+// const Forum = require('./../models/forum');
 // CREATE
-// POST
-        forumRouter.findOneAndUpdate('/', async (req, res) => {
-            try {
-            { _id: req.params.id }, // search criteria of what to update
-            { $push: { post: req.body } }, // how to update it
-            { new: true }, // tells findOneAndUpdate to return modified article, not the original
-            (err, forums) => {
-                console.log(forums);
-                db.close();
-            });
-            res.status(201).json(forums)
-            } catch(err) {
-                console.log(err)
-            }
-        })
-        
+// POST 
 
-
-// DESTROY
-// DELETE /reviews/:id
+  // DESTROY
+  // DELETE /reviews/:id
 //   forumRouter.delete('/:id', (req, res, next) => {
 //     const id = req.params.id
 //     Forum.findOne({ 'post._id': id })
@@ -44,8 +16,8 @@ const Forum = require('./../models/forum');
 //       .then(() => res.sendStatus(204))
 //       .catch(next)
 //   })
-//   // UPDATE
-//   // PATCH /reviews/:id
+  // UPDATE
+  // PATCH /post/:id
 //   forumRouter.patch('/:id', (req, res, next) => {
 //     const id = req.params.id
 //     const postData = req.body
@@ -60,5 +32,4 @@ const Forum = require('./../models/forum');
 //       .then(() => res.sendStatus(204))
 //       .catch(next)
 //   })
-
-module.exports = forumRouter
+  //module.exports = forumRouter
