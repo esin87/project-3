@@ -21,9 +21,9 @@ mongoose.connect(mongoURI);
 //routes
 
 //redirect
-app.get('/', (req, res)=>{
-    res.redirect('/forums');
-});
+// app.get('/', (req, res)=>{
+//     res.redirect('/forums');
+// });
 
 //forum routes
 
