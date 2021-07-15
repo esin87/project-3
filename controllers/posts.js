@@ -1,7 +1,7 @@
-const express = require('express');
-const forumRouter = express.Router();
+// const express = require('express');
+// const forumRouter = express.Router();
 
-const Forum = require('./../models/forum');
+// const Forum = require('./../models/forum');
 
 
 // Forum.findOneAndUpdate(
@@ -15,20 +15,20 @@ const Forum = require('./../models/forum');
 //     });
 // CREATE
 // POST
-        forumRouter.findOneAndUpdate('/', async (req, res) => {
-            try {
-            { _id: req.params.id }, // search criteria of what to update
-            { $push: { post: req.body } }, // how to update it
-            { new: true }, // tells findOneAndUpdate to return modified article, not the original
-            (err, forums) => {
-                console.log(forums);
-                db.close();
-            });
-            res.status(201).json(forums)
-            } catch(err) {
-                console.log(err)
-            }
-        })
+        // forumRouter.findOneAndUpdate('/', async (req, res) => {
+        //     try {
+        //     { _id: req.params.id }, // search criteria of what to update
+        //     { $push: { post: req.body } }, // how to update it
+        //     { new: true }, // tells findOneAndUpdate to return modified article, not the original
+        //     (err, forums) => {
+        //         console.log(forums);
+        //         db.close();
+        //     });
+        //     res.status(201).json(forums)
+        //     } catch(err) {
+        //         console.log(err)
+        //     }
+        // })
         
 
 
@@ -61,4 +61,4 @@ const Forum = require('./../models/forum');
 //       .catch(next)
 //   })
 
-module.exports = forumRouter
+// module.exports = forumRouter

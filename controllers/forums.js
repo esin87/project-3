@@ -11,9 +11,10 @@ forumRouter.get('/', async (req, res) => {
     }catch(err){
         console.log(err)
     }
+    // res.send("welcome to the forum API")
 });
 
-//Show
+// Show
 forumRouter.get('/:id', async (req, res)=>{
 	try{
 		const forumId = await Forum.findById(req.params.id)

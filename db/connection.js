@@ -10,19 +10,24 @@ const db = mongoose.connection;
 
 //middleware
 
-app.use(cors());
+// app.use(cors());
 
-app.use(express.json());
+// app.use(express.json());
 
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 
 // Connect to Mongo
 mongoose.connect(mongoURI, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-	useCreateIndex: true,
-});
-
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+},  function (err, res) {
+        try {
+            console.log('Connected to Database');
+        } catch (err) {
+            throw err;
+        }
+    })
 // Connection Error/Success - optional but can be helpful
 // Define callback functions for various events
 db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
@@ -31,14 +36,14 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 
 //seeding the db
 
-const seedData = require('../db/seed')
-Forum.findOneAndUpdate(seedData, (err, forum) => {
-	if (err) {
-		console.log(err);
-	}
-	console.log('added provided forum data', forum);
-	db.close();
-});
+// const seedData = require('../db/seed')
+// Forum.findOneAndUpdate(seedData, (err, forum) => {
+// 	if (err) {
+// 		console.log(err);
+// 	}
+// 	console.log('added provided forum data', forum);
+// 	db.close();
+// });
 
 
 // Open the Connection
