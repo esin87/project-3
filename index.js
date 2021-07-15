@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose')
+const connection = require('./db/connection')
 const PORT = process.env.PORT || 8000;
 
 
@@ -14,6 +15,9 @@ app.use(express.urlencoded({extended: true}));
 // Mongo URL and Connection
 const mongoURI = process.env.DATABASE_URL;
 const db = mongoose.connection;
+
+//connect to mongo
+// mongoose.connect( mongoURI );
 
 db.on('open', () => {
 	console.log('✅ mongo connection made!');
@@ -31,9 +35,9 @@ app.get('/', (req, res)=>{
 const forumController = require('./controllers/forums.js')
 app.use('/forums', forumController)
 
-// Post Routes
-// const postController = require('./controllers/posts.js')
-// app.use('/post', postController)
+//Post Routes
+const postController = require('./controllers/posts.js')
+app.use('/posts', postController)
 
 app.listen(PORT, ()=>
 console.log('forum api is listening on port:'+ PORT )
