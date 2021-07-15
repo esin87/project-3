@@ -1,40 +1,44 @@
 const express = require('express');
 const Forum = require('../models/forum');
-const postRouter= express.Router();
-
-const Posts = require('../models/post');
-
-//CREATE
-postRouter.get('/', async (req, res) => {
-    try{
-        const allPosts = await Forum.find();
-        res.json(allPosts);
-    }catch(err){
-        console.log(err)
-    }
-});
+const postRouter = express.Router();
 
 // POST 
-postRouter.post('/', (req, res, next) => {
-    // get the post data from the body of the request
-    const postData = req.body
-    // get the forum id from the body
-    const postId = postData.postId
-    // find the forum by its id
-    Forum.findById(postId)
-      .then(forum => {
-        // add review to restaurant
-        forum.post.push(postData)
-        // save restaurant
-        return forum.save()
-      })
-      // send response back to client
-      .then(forum=> res.status(201).json({forum: forum}))
-      .catch(next)
-  })
+// postRouter.post('/', (req, res, next) => {
+//     // get the post data from the body of the request
+//     const postData = req.body
+//     // get the forum id from the body
+//     const forumId = postData.forumId
+//     // find the forum by its id
+//     Forum.findById(forumId)
+//         .then(forum => {
+//             forum.posts.push(postData)
+//             return forum.save()
+//         })
+//         // send response back to client
+//         .then(forum => res.status(201).json(forum))
+//         .catch(next)
+// })
 
-  // DESTROY
-  //DELETE /reviews/:id
+postRouter.post('/', async (req, res, next) => {
+    try {
+        // get the post data from the body of the request
+        const postData = req.body
+        // get the forum id from the body
+        const forumId = postData.forumId
+        // find the forum by its id
+        const forum = await Forum.findById(forumId)
+        forum.posts.push(postData)
+        const updatedForum = await forum.save()
+        res.status(201).json(updatedForum)
+    } catch (err) {
+        console.log(err)
+    }
+})
+
+
+
+// DESTROY
+//DELETE /reviews/:id
 //   forumRouter.delete('/:id', (req, res, next) => {
 //     const id = req.params.id
 //     Forum.findOne({ 'post._id': id })
@@ -45,8 +49,8 @@ postRouter.post('/', (req, res, next) => {
 //       .then(() => res.sendStatus(204))
 //       .catch(next)
 //   })
-  // UPDATE
-  // PATCH /post/:id
+// UPDATE
+// PATCH /post/:id
 //   forumRouter.patch('/:id', (req, res, next) => {
 //     const id = req.params.id
 //     const postData = req.body

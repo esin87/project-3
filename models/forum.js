@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const postSchema= require('./post');
+const postSchema = require('./post');
 
 const forumSchema=  new mongoose.Schema({
     topic: {
