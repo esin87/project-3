@@ -17,7 +17,7 @@ const mongoURI = process.env.DATABASE_URL;
 const db = mongoose.connection;
 
 //connect to mongo
-// mongoose.connect( mongoURI );
+mongoose.connect( mongoURI );
 
 db.on('open', () => {
 	console.log('✅ mongo connection made!');
@@ -32,12 +32,16 @@ app.get('/', (req, res)=>{
 //Routes
 
 //Forum routes
-const forumController = require('./controllers/forums.js')
+const forumController = require('./controllers/forums.js');
 app.use('/forums', forumController)
 
 //Post Routes
-const postController = require('./controllers/posts.js')
+const postController = require('./controllers/posts.js');
 app.use('/posts', postController)
+
+//user routes 
+const usersController = require('./controllers/users.js');
+app.use('/users', usersController);
 
 app.listen(PORT, ()=>
 console.log('forum api is listening on port:'+ PORT )
