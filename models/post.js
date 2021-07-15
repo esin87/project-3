@@ -1,11 +1,6 @@
-const mongoose = require('mongoose');
-
+const mongoose = require('../db/connection');
 
 const postSchema =  new mongoose.Schema({
-    user:{
-        type:String,
-        required: true,
-    },
     title:{
         type:String, 
         required:true,

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const postSchema= require('./post');
+const postSchema = require('./post');
 
 const forumSchema=  new mongoose.Schema({
     topic: {
@@ -16,4 +16,5 @@ const forumSchema=  new mongoose.Schema({
 })
 
 const Forum = mongoose.model('Forum', forumSchema);
+
 module.exports = Forum;

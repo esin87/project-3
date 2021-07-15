@@ -35,12 +35,12 @@ forumRouter.post('/', async( req, res)=>{
 //Put
 forumRouter.put('/:id', async(req, res)=> {
 	try{
-		const updateForum = await Fourm.findByIdAndUpdate(
+		const updateForum = await Forum.findByIdAndUpdate(
 			req.params.id,
 			req.body,
 			{ new:true } 
 		);
-		res.status(201).json(updatedForum)
+		res.status(201).json(updateForum)
 	}catch(err){
 		console.log(err)
 	}
@@ -56,4 +56,4 @@ forumRouter.delete('/:id', async (req, res)=>{
 	}
 })
 
-module.exports = forumRouter
+module.exports = forumRouter;
