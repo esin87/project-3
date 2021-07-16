@@ -13,7 +13,11 @@ const signin = async (req, res) => {
 
     if(!existingUser) return res.status(404).json({ message: 'user dosnt exist'});
 
-    const isPassswordCorrect = await ncrypt.compare(password, existingUser.password)
+    let isPasswordCorrect ;
+
+    if(password == existingUser.password) {
+      isPasswordCorrect = true
+    }
     
     if(!isPasswordCorrect) return res.status(400).json({ message: "invalid credentials" })
 
@@ -21,7 +25,7 @@ const signin = async (req, res) => {
 
     res.status(200).json({ result: existingUser, token })
   } catch (err) {
-    res.status(500).json({ message: 'something went wrong'})
+    console.log(err)
   }
 }
 
@@ -49,6 +53,8 @@ const signup = async (req, res) => {
 }
 
 router.post('/signup', signup);
+
+router.post('/login', signin)
 
 router.get('/', async (req, res) => {
   try{
