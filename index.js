@@ -40,8 +40,8 @@ const postController = require('./controllers/posts.js');
 app.use('/posts', postController)
 
 //user routes 
-// const usersController = require('./controllers/users.js');
-// app.use('/users', usersController);
+const usersController = require('./controllers/users.js');
+app.use('/user', usersController);
 
 app.listen(PORT, ()=>
 console.log('forum api is listening on port:'+ PORT )
