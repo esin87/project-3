@@ -1,25 +1,9 @@
 const express = require('express');
 const Forum = require('../models/forum');
 const postRouter = express.Router();
+const Post = require('../models/post');
 
-// POST 
-// postRouter.post('/', (req, res, next) => {
-//     // get the post data from the body of the request
-//     const postData = req.body
-//     // get the forum id from the body
-//     const forumId = postData.forumId
-//     // find the forum by its id
-//     Forum.findById(forumId)
-//         .then(forum => {
-//             forum.posts.push(postData)
-//             return forum.save()
-//         })
-//         // send response back to client
-//         .then(forum => res.status(201).json(forum))
-//         .catch(next)
-// })
-
-postRouter.post('/', async (req, res, next) => {
+postRouter.post('/', async (req, res) => {
     try {
         // get the post data from the body of the request
         const postData = req.body
@@ -35,34 +19,32 @@ postRouter.post('/', async (req, res, next) => {
     }
 })
 
+postRouter.delete('/:id', async (req, res)=>{
+    try{
+        //get id 
+        const postId = req.params.id
+        const forum = await Forum.findOne({'posts._id': postId})
+        forum.posts.id(postId).remove()
+        const deletedForum = await forum.save()
+        res.sendStatus(204).json(deletedForum);
+    }catch(err){
+        console.log(err)
+    }
+})
 
 
-// DESTROY
-//DELETE /reviews/:id
-//   forumRouter.delete('/:id', (req, res, next) => {
-//     const id = req.params.id
-//     Forum.findOne({ 'post._id': id })
-//       .then(forum => {
-//         forum.posts.id(id).remove()
-//         return forum.save()
-//       })
-//       .then(() => res.sendStatus(204))
-//       .catch(next)
-//   })
-// UPDATE
-// PATCH /post/:id
-//   forumRouter.patch('/:id', (req, res, next) => {
-//     const id = req.params.id
-//     const postData = req.body
-//     Forum.findOne({
-//       'reviews._id': id,
-//     })
-//       .then(forum => {
-//         const review = forum.posts.id(id)
-//         review.set(postData)
-//         return forum.save()
-//       })
-//       .then(() => res.sendStatus(204))
-//       .catch(next)
-//   })
+postRouter.patch('/:id', async (req, res)=>{
+    try{
+        const postId = req.params.id
+        const postData = req.body
+        const forum = await Forum.findOne({'posts._id': postId})
+        const post = forum.posts.id(postId)
+        post.set(postData)
+        const updatedPost = await forum.save();
+        res.status(201).json(updatedPost);
+    }catch(err){
+        console.log(err)
+    }
+})
+
 module.exports = postRouter;
