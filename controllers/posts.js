@@ -46,5 +46,15 @@ postRouter.patch('/:id', async (req, res)=>{
         console.log(err)
     }
 })
-///
+
+postRouter.get('/:id', async (req, res)=>{
+    try{
+        const postId = req.params.id
+        const forum = await Forum.findOne({'posts._id': postId});
+        const post = forum.posts.id(postId)
+        res.json(post);
+    }catch(err){
+        console.log(err);
+    }
+})
 module.exports = postRouter;
