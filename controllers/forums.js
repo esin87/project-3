@@ -16,6 +16,7 @@ forumRouter.get('/', async (req, res) => {
 
 // Show
 forumRouter.get('/:id', async (req, res)=>{
+
 	try{
 		const forumId = await Forum.findById(req.params.id)
 		res.json(forumId);
@@ -23,6 +24,8 @@ forumRouter.get('/:id', async (req, res)=>{
 		console.log(err)
 	}
 });
+
+
 //Create
 forumRouter.post('/', async( req, res)=>{
 	try{
@@ -47,6 +50,7 @@ forumRouter.put('/:id', async(req, res)=> {
 });
 //Delete
 forumRouter.delete('/:id', async (req, res)=>{
+	
 	try{
 		const deletedForum = await Forum.findByIdAndDelete(req.params.id)
 		console.log(deletedForum);
