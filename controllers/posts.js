@@ -5,11 +5,8 @@ const Post = require('../models/post');
 
 postRouter.post('/', async (req, res) => {
     try {
-        // get the post data from the body of the request
         const postData = req.body
-        // get the forum id from the body
         const forumId = postData.forumId
-        // find the forum by its id
         const forum = await Forum.findById(forumId)
         forum.posts.push(postData)
         const updatedForum = await forum.save()
@@ -18,10 +15,9 @@ postRouter.post('/', async (req, res) => {
         console.log(err)
     }
 })
-//delete
+
 postRouter.delete('/:id', async (req, res)=>{
     try{
-        //get id 
         const postId = req.params.id
         const forum = await Forum.findOne({'posts._id': postId})
         forum.posts.id(postId).remove()
@@ -32,7 +28,7 @@ postRouter.delete('/:id', async (req, res)=>{
     }
 })
 
-//patch
+
 postRouter.patch('/:id', async (req, res)=>{
     try{
         const postId = req.params.id
@@ -46,7 +42,7 @@ postRouter.patch('/:id', async (req, res)=>{
         console.log(err)
     }
 })
-//show route
+
 postRouter.get('/:id', async (req, res)=>{
     try{
         const postId = req.params.id
@@ -57,4 +53,7 @@ postRouter.get('/:id', async (req, res)=>{
         console.log(err);
     }
 })
+
 module.exports = postRouter;
+
+

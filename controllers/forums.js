@@ -11,7 +11,6 @@ forumRouter.get('/', async (req, res) => {
     }catch(err){
         console.log(err)
     }
-    // res.send("welcome to the forum API")
 });
 
 // Show

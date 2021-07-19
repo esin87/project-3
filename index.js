@@ -6,24 +6,11 @@ const mongoose = require('mongoose');
 const PORT = process.env.PORT || 8000;
 
 
-
 //middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-
-// mongoose.connect(mongoURI, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useCreateIndex: true,
-// },  function (err, res) {
-//         try {
-//             console.log('Connected to Database');
-//         } catch (err) {
-//             throw err;
-//         }
-//     })
 
 // Redirect
 app.get('/', (req, res)=>{
