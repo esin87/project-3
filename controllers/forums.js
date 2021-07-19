@@ -1,6 +1,6 @@
 const express = require('express');
 const forumRouter = express.Router();
-
+const postRouter = express.Router();
 const Forum = require('../models/forum');
 
 // Index
@@ -55,5 +55,6 @@ forumRouter.delete('/:id', async (req, res)=>{
 		console.log(err)
 	}
 })
+
 
 module.exports = forumRouter;
